@@ -1,0 +1,178 @@
+<style type="text/css">
+.mainDiv {
+	text-align: center;
+}
+	.topDiv {
+		width: 100%;
+		height: 40px;
+		color:#FFF;
+
+	}
+	.headBox {
+	    width: 107px;
+	    height: 40px;
+	    background-color: #f8f8f8;
+	    float: left;
+	    color: #171616;
+	    border: 1px solid #e8e8e8;
+	    padding: 10px;
+	    font-weight: bold;
+
+
+	}
+	.headBoxInstallment {
+		width: 107px;
+		height: 40px;
+		background-color:#FFF;
+		float:left;
+		color:#000;
+		padding: 10px;
+	}
+
+	.headBox p {
+		text-align: center;
+	}
+	.centerDiv {
+		width: 100%;
+		background-color:#ccc;
+		color:#FFF;
+
+	}
+
+	.installmentCount {
+		width: 107px;
+	    background-color: #f8f8f8;
+	    border: 1px solid #e8e8e8;
+		float:left;
+		color:#000;
+
+	}
+
+	.installmentCount p {
+		text-align: center;
+	        padding: 25px;
+	    border: 1px solid #e8e8e8;
+	    margin-bottom: 0px;
+	    height: 64.5px;
+	}
+
+	.centerBox {
+		width: 107px;
+	    background-color: #f8f8f8;
+		float:left;
+		color:#000;
+
+	}
+
+	.centerBox p {
+		text-align: center;
+	    padding: 5px;
+	    border-bottom: 2px solid #e8e8e8;
+	    border-right: 2px solid #e8e8e8;
+	    border-bottom-style: dotted;
+	    border-right-style: dotted;
+	    margin-bottom: 0px;
+	    height: 65px;
+	    font-size: 10.5px;
+	    color:#FFF;
+	}
+
+	.prepay {
+		padding-top:25px !important;
+		font-weight: bold;
+	}
+	.Maximum {
+
+		background-color:#f42394;
+	}
+
+	.MaximumAvantage {
+
+		background-color:#ca006f;
+	}
+
+	.Cardfinans {
+		background-color: #2e5dc0;
+	}
+
+	.CardfinansAvantage {
+		background-color:#012c84;
+	}
+
+	.Paraf {
+		background-color:#00caea;
+	}
+
+	.ParafAvantage {
+		background-color:#01a4bf;
+	}
+
+	.World {
+		background-color:#6f6b98;
+
+	}
+
+	.WorldAvantage {
+		background-color:#504b80;
+
+	}
+
+	.Axess {
+		background-color:#e2b631;
+
+	}
+
+	.AxessAvantage {
+		background-color:#dda907;
+
+	}
+
+	.Bonus {
+		background-color:#02633a;
+	}
+
+	.BonusAvantage {
+		background-color:#02633a;
+	}
+</style>
+{% if status %}
+<div class="mainDiv">
+<div class="topDiv">
+		<div class="headBoxInstallment">
+			<p>{{installment}}</p>
+		</div>
+		{%for bank in banks  %}
+			<div class="headBox">
+				<p>{{bank}}</p>
+			</div>
+		{% endfor %}
+</div>
+<div class="centerDiv">
+			<div class="installmentCount">
+		{% for installment in installments  %}
+				{% if installment == '1' %}
+					<p>{{prepay}}</p>
+				{% else %}
+					<p >{{installment}}</p>
+				{% endif %}
+		{% endfor %}
+			</div>
+
+		{% for i in result %}
+			<div class="centerBox">
+				{% for j in i.installmentPrices %}
+					{% if j.installmentNumber == '1' %}
+						<p  class="prepay {{i.cardFamilyName}}Avantage">{{j.totalPrice}} {{symbolRight}}</p>
+					{% else %}
+						<p class="{{i.cardFamilyName}}"><strong>{{j.installmentPrice}} {{symbolRight}} x {{j.installmentNumber}}</strong>
+						<br>
+						TOPLAM: {{j.totalPrice}} {{symbolRight}}</p>
+					{% endif %}
+				{% endfor %}    
+			</div>
+		{% endfor %}
+
+</div>
+</div>
+<p style="float:right;margin:5px;">Taksit bilgileri gösterim amaçlıdır.</p>
+{% endif %}

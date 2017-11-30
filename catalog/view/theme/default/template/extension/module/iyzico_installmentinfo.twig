@@ -1,0 +1,52 @@
+<script type="text/javascript">
+
+
+var getTab = document.getElementsByClassName('nav nav-tabs')[0];
+var innerCreatli = document.createElement('li');
+innerCreatli.className = ('installmentTab');
+getTab.appendChild(innerCreatli);
+
+var tab = document.createElement('a');
+tab.className = ('installment');
+tab.textContent = "{{title}}";
+tab.setAttribute("href", "#tab-installment");
+tab.setAttribute("data-toggle", "tab");
+
+innerCreatli.appendChild(tab);
+
+var getContent = document.getElementsByClassName('tab-content')[0];
+var getContentDiv = document.createElement('div');
+getContentDiv.className = ('tab-pane');
+getContentDiv.setAttribute("id", "tab-installment");
+getContent.appendChild(getContentDiv);
+
+
+
+</script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+
+	$(".installmentTab").click(function() {
+
+		var product_id = '{{product_id}}';
+
+		console.log(product_id);
+		$.ajax({
+		       url: "?route=extension/module/iyzico_installmentinfo/InstallmentInfo",
+		       type: "post",
+		       data: {product_id: product_id},
+		       success: function (response) {
+
+		  			$("#tab-installment").html(response);
+
+		       },
+		       error: function(jqXHR, textStatus, errorThrown) {
+		          console.log(textStatus, errorThrown);
+		       }
+
+
+		   });
+	});
+});
+</script>
