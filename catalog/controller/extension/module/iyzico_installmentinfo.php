@@ -28,8 +28,8 @@ class ControllerExtensionModuleIyzicoInstallmentInfo extends Controller {
         $product_info = $this->model_catalog_product->getProduct($this->request->post['product_id']);
 
 
-
-		$data['symbolRight'] = $this->currencyCodeConvert($this->session->data['currency']);
+		$data['symbolRight'] = $this->currency->getSymbolRight($this->session->data['currency']);
+    	
 
         if($product_info['special']){
         	$price = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'],'',false);
@@ -96,28 +96,6 @@ class ControllerExtensionModuleIyzicoInstallmentInfo extends Controller {
 
 		return $this->response->setOutput($this->load->view('extension/module/iyzico_installmentinfoTable', $data));
 
-	}
-
-	private function currencyCodeConvert($currencyCode) {
-		$rightSymbol = 'TL';
-		switch($currencyCode){
-		    case "TRY":
-		        $rightSymbol = 'TL';
-		        break;
-		    case "USD":
-		        $rightSymbol = '$';
-		        break;
-		    case "GBP":
-		        $rightSymbol = '£';
-		        break;
-		    case "EUR":
-		        $rightSymbol = '€';
-		        break;
-		    case "IRR":
-		        $rightSymbol = 'ریال ایران';
-		        break;
-		}
-		return $rightSymbol;
 	}
 
 	private function getCurrencyConstant($currencyCode){
