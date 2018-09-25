@@ -1,2 +1,2 @@
-# Iyzico-InstallmentInfo-Opencart3.0.x
+# Iyzipay Opencart Installment
 Iyzico Installment Info Tab for Opencart
